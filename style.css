@@ -15,6 +15,10 @@ body {
 	background-color: #ddd;
 	padding: 20px;
 }
+#arena #log {
+	height: 200px;
+	overflow: scroll;
+}
 #energia {
 	padding: 20px 20px 0;
 }
