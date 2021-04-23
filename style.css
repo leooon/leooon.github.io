@@ -13,7 +13,6 @@ body {
 	flex-direction: column;
 }
 #arena {
-	height: 360px;
 	background-color: #ddd;
 	padding: 20px;
 	flex-grow: 1;
