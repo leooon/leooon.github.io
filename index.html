@@ -11,8 +11,9 @@
 <body>
 	<div id="container">
 		<div id="arena">
-			Você: <span class="voce-pontos">0</span><br><br>
-			Inimigo: <span class="inimigo-pontos">0</span><br><br>
+			Turno: <span id="turno">0</span><br>
+			Você: <span id="voce-respeito">0</span><br>
+			Inimigo: <span id="inimigo-respeito">0</span><br><br>
 			<div id="log"></div>
 		</div>
 		<div id="energia">
@@ -20,32 +21,10 @@
 				<div id="preenchimento"></div>
 			</div>
 		</div>
+		<div id="menuGolpes"></div>
 		<div id="menu">
-			<div class="botao" data-energia="30" data-respeito="45" data-nome="Air Flare">
-				<div class="nome">Air Flare</div>
-				<div class="energia-valor">30e</div>
-				<div class="respeito-valor">45r</div>
-			</div>
-			<div class="botao" data-energia="75" data-respeito="120" data-nome="Deadman">
-				<div class="nome">Deadman</div>
-				<div class="energia-valor">75e</div>
-				<div class="respeito-valor">120r</div>
-			</div>
-			<div class="botao" data-energia="110" data-respeito="180" data-nome="BabyFreeze">
-				<div class="nome">BabyFreeze</div>
-				<div class="energia-valor">110e</div>
-				<div class="respeito-valor">180r</div>
-			</div>
-			<div class="botao" data-energia="30" data-respeito="80" data-nome="Hellicopter">
-				<div class="nome">Hellicopter</div>
-				<div class="energia-valor">30e</div>
-				<div class="respeito-valor">80r</div>
-			</div>
-			<div class="botao" data-energia="140" data-respeito="400" data-nome="The Frog">
-				<div class="nome">The Frog</div>
-				<div class="energia-valor">140e</div>
-				<div class="respeito-valor">400r</div>
-			</div>
+			<div>Batalha</div>
+			<div class="ativo">Academia</div>
 		</div>
 	</div>
 </body>

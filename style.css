@@ -1,23 +1,27 @@
 body {
 	background-color: #000;
 	margin: 0;
-	font: 16px Georgia;
+	font: 14px Georgia;
 	box-sizing: border-box;
 }
 #container {
 	background-color: #fff;
-	width: 400px;
+	max-width: 400px;
 	height: 100vh;
 	margin: auto;
+	display: flex;
+	flex-direction: column;
 }
 #arena {
 	height: 360px;
 	background-color: #ddd;
 	padding: 20px;
+	flex-grow: 1;
 }
 #arena #log {
 	height: 200px;
 	overflow: scroll;
+	background-color: azure;
 }
 #energia {
 	padding: 20px 20px 0;
@@ -32,13 +36,13 @@ body {
 	background: #A5EBC3;
 	width: 100%;
 }
-#menu {	
+#menuGolpes {	
 	padding: 20px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 18px;
 }
-#menu .botao {
+#menuGolpes .botao {
 	border: 1px solid #000;
 	box-shadow: 5px 5px 0px 0px #000000;
 	display: grid;
@@ -46,19 +50,35 @@ body {
 	align-items: center;
 	grid-template-columns: repeat(2, 1fr);
 	text-align: center;
+	font-size: 14px;
 }
-#menu .botao.ativo {
+#menuGolpes .botao.ativo {
 	background-color: #F8E2FF;
 }
-#menu .botao.proibido {
+#menuGolpes .botao.proibido {
 	background-color: #ff9e9e;
 }
-#menu .botao div {
+#menuGolpes .botao div {
 	padding: 0 10px 10px;
 }
-#menu .botao .nome {
+#menuGolpes .botao .nome {
 	grid-column: 1 / 3;
 	grid-row: 1;
 	padding: 10px 10px 5px;
 	text-align: center;
+}
+#menu {
+	height: 50px;
+	display: flex;
+	border-top: 3px solid #000;
+}
+#menu div {
+	cursor: pointer;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#menu div.ativo {
+	text-decoration: underline solid #00DCFF 4px;
 }
