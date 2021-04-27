@@ -44,8 +44,7 @@ function montarMenuGolpes() {
 
 document.addEventListener('DOMContentLoaded', () => {
 	ativaMenu();
-	montarMenuGolpes();
-	timer = setInterval(iniciarTurno, 1000);
+	montaCenaBatalha();
 });
 
 let energiaTotal    = 200;
@@ -54,6 +53,8 @@ let energiaGanho    = 100;
 let contagem        = 3;
 let respeitoVoce    = 0;
 let respeitoInimigo = 0;
+let timer;
+let log = [];
 
 function escolheGolpes() {
 	let contagemAtual = contagem;
@@ -86,11 +87,18 @@ function escolheGolpes() {
 let turno = 0;
 let fase  = 0;
 function iniciarTurno() {
+	if (turno >= 5) {
+		timer = null;
+		clearInterval(timer);
+
+		return;
+	}
+
 	if (fase == 1) {
 		resetBotoes();
 
 		energia += energiaGanho;
-		criaLog('<br>Recarregou '+ energiaGanho +' energia.<br><br>');
+		criaLog('--> Recarregou '+ energiaGanho +' energia.<br>');
 
 		atualizaEnergia();
 
@@ -105,9 +113,7 @@ function iniciarTurno() {
 
 	turno++;
 	let infoTurno = sel('#turno')[0];
-	infoTurno.innerHTML = turno;
-
-	if (turno == 5) clearInterval(timer);
+	infoTurno.innerHTML = turno; 
 }
 
 function resetBotoes() {
@@ -124,8 +130,17 @@ function atualizaRespeito() {
 	sel('#voce-respeito')[0].innerHTML = respeitoVoce;
 }
 function criaLog(texto) {
-	let log = sel('#log')[0];
-	log.insertAdjacentHTML('afterbegin', texto);
+	log.push(texto);
+
+	exibeLog();
+}
+function exibeLog() {
+	let logArea = sel('#log')[0];
+	logArea.innerHTML = '';
+
+	log.forEach(texto => {
+		logArea.insertAdjacentHTML('afterbegin', texto);
+	})
 }
 
 function ativaMenu() {
@@ -134,7 +149,59 @@ function ativaMenu() {
 	botoesMenu.forEach(el => el.addEventListener('click', () => {
 		let ativo = sel('#menu div.ativo')[0];
 		ativo.classList.remove('ativo');
-
 		el.classList.add('ativo');
+
+		if (el.classList.contains('batalha')) {
+			montaCenaBatalha();
+		} else if (el.classList.contains('academia')) {
+			montaCenaAcademia();
+		}
 	}));
+}
+
+function montaCenaBatalha() {
+	let cena = sel('#cena')[0];
+	cena.classList.remove(...cena.classList);
+	cena.classList.add('batalha');
+
+	cena.innerHTML = `
+		<div id="arena">
+			Turno: <span id="turno">${turno}</span><br>
+			Você: <span id="voce-respeito">${respeitoVoce}</span><br>
+			Inimigo: <span id="inimigo-respeito">${respeitoInimigo}</span><br><br>
+			<div id="log"></div>
+		</div>
+		<div id="energia">
+			<div id="marcador">
+				<div id="preenchimento"></div>
+			</div>
+		</div>
+		<div id="menuGolpes"></div>
+	`;
+
+	exibeLog();
+	montarMenuGolpes();
+	atualizaEnergia();
+
+	if (!timer)	timer = setInterval(iniciarTurno, 1000);
+}
+function montaCenaAcademia() {
+	clearInterval(timer);
+	timer = null;
+
+	let cena = sel('#cena')[0];
+	cena.classList.remove(...cena.classList);
+	cena.classList.add('academia');
+
+	cena.innerHTML = `
+		<div id="energia">
+			<div id="indicador">
+				Energia: 30 <br><br>
+				<div id="marcador">
+					<div id="preenchimento"></div>
+				</div>
+			</div>
+			<div class="botao">+1</div>
+		</div>
+	`;
 }
