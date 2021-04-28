@@ -1,4 +1,4 @@
-let versao = 0.1;
+let versao = 0.2;
 
 let golpes = [];
 
@@ -44,12 +44,15 @@ function montarMenuGolpes() {
 	});
 }
 
+function corrigeAltura() {
+	sel('#container')[0].style.height = window.innerHeight +'px';
+}
 document.addEventListener('DOMContentLoaded', () => {
-	sel('#container')[0].height = window.innerHeight;
-
+	corrigeAltura();
 	ativaMenu();
 	montaCenaBatalha();
 });
+window.addEventListener('resize', corrigeAltura);
 
 let energiaTotal    = 200;
 let energia         = 200;
