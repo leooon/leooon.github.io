@@ -50,7 +50,7 @@ function corrigeAltura() {
 document.addEventListener('DOMContentLoaded', () => {
 	corrigeAltura();
 	ativaMenu();
-	montaCenaBatalha();
+	montaCenaAcademia();
 });
 window.addEventListener('resize', corrigeAltura);
 
@@ -210,6 +210,40 @@ function montaCenaAcademia() {
 				</div>
 			</div>
 			<div class="botao">+1</div>
+		</div>
+		<div id="atividades">
+			<div>
+				<div class="valores">Força: <span id="forcaValores">1k (+10/s)</div>
+				<div class="capacidade">
+					<div class="preenchimento"></div>
+				</div>
+				<div class="botao">+</div>
+				<div class="botao">-</div>
+			</div>
+			<div>
+				<div class="valores">Destreza: <span id="forcaValores">1k (+10/s)</div>
+				<div class="capacidade">
+					<div class="preenchimento"></div>
+				</div>
+				<div class="botao">+</div>
+				<div class="botao">-</div>
+			</div>
+			<div>
+				<div class="valores">Equilíbrio: <span id="forcaValores">1k (+10/s)</div>
+				<div class="capacidade">
+					<div class="preenchimento"></div>
+				</div>
+				<div class="botao">+</div>
+				<div class="botao">-</div>
+			</div>
+			<div>
+				<div class="valores">Charme: <span id="forcaValores">1k (+10/s)</div>
+				<div class="capacidade">
+					<div class="preenchimento"></div>
+				</div>
+				<div class="botao">+</div>
+				<div class="botao">-</div>
+			</div>
 		</div>
 	`;
 }
