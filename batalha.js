@@ -1,3 +1,5 @@
+let versao = 0.1;
+
 let golpes = [];
 
 class Golpe {
@@ -43,6 +45,8 @@ function montarMenuGolpes() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	sel('#container')[0].height = window.innerHeight;
+
 	ativaMenu();
 	montaCenaBatalha();
 });
@@ -166,6 +170,7 @@ function montaCenaBatalha() {
 
 	cena.innerHTML = `
 		<div id="arena">
+			Versão: ${versao}<br>
 			Turno: <span id="turno">${turno}</span><br>
 			Você: <span id="voce-respeito">${respeitoVoce}</span><br>
 			Inimigo: <span id="inimigo-respeito">${respeitoInimigo}</span><br><br>
