@@ -63,6 +63,9 @@ let respeitoInimigo = 0;
 let timer;
 let log = [];
 
+let folego           = 0;
+let folegoCapacidade = 30;
+
 function escolheGolpes() {
 	let contagemAtual = contagem;
 
@@ -202,14 +205,14 @@ function montaCenaAcademia() {
 	cena.classList.add('academia');
 
 	cena.innerHTML = `
-		<div id="energia">
+		<div id="folego">
 			<div id="indicador">
-				Energia: 30 <br><br>
+				Folego: <span id="folegoInfo">${folego}</span><br><br>
 				<div id="marcador">
-					<div id="preenchimento"></div>
+					<div class="preenchimento"></div>
 				</div>
 			</div>
-			<div class="botao">+1</div>
+			<div class="botao" id="botaoFolego">+1</div>
 		</div>
 		<div id="atividades">
 			<div>
@@ -217,33 +220,48 @@ function montaCenaAcademia() {
 				<div class="capacidade">
 					<div class="preenchimento"></div>
 				</div>
-				<div class="botao">+</div>
 				<div class="botao">-</div>
+				<div class="botao">+</div>
 			</div>
 			<div>
 				<div class="valores">Destreza: <span id="forcaValores">1k (+10/s)</div>
 				<div class="capacidade">
 					<div class="preenchimento"></div>
 				</div>
-				<div class="botao">+</div>
 				<div class="botao">-</div>
+				<div class="botao">+</div>
 			</div>
 			<div>
 				<div class="valores">Equilíbrio: <span id="forcaValores">1k (+10/s)</div>
 				<div class="capacidade">
 					<div class="preenchimento"></div>
 				</div>
-				<div class="botao">+</div>
 				<div class="botao">-</div>
+				<div class="botao">+</div>
 			</div>
 			<div>
 				<div class="valores">Charme: <span id="forcaValores">1k (+10/s)</div>
 				<div class="capacidade">
 					<div class="preenchimento"></div>
 				</div>
-				<div class="botao">+</div>
 				<div class="botao">-</div>
+				<div class="botao">+</div>
 			</div>
 		</div>
 	`;
+
+	sel('#botaoFolego')[0].addEventListener('click', adicionarFolego);
+}
+
+function adicionarFolego() {
+	if (folego == folegoCapacidade) return false;
+
+	folego++;
+
+	sel('#folegoInfo')[0].innerHTML = folego;
+	sel('#folego .preenchimento')[0].style.width = retornarPorcentagem(folego, folegoCapacidade) + "%";
+}
+
+function retornarPorcentagem(atual, total) {
+	return Math.ceil((atual / total) * 100);
 }

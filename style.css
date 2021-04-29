@@ -15,6 +15,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	overflow: hidden scroll;
 }
 #arena {
 	background-color: #ddd;
@@ -84,14 +85,25 @@ body {
 	text-decoration: underline solid #00DCFF 4px;
 }
 
-.academia #energia {
+/* ACADEMIA */
+.academia #folego {
 	display: flex;
 	border-bottom: 1px solid #000;
 	padding-bottom: 30px;
+	padding: 20px;
 }
-.academia #energia #indicador {
+.academia #folego #indicador {
 	flex-grow: 1;
 	margin-right: 30px;
+}
+.academia #folego #marcador {
+	display: flex;
+	border: 1px solid #1ECC6A;
+	box-shadow: 5px 5px 0px 0px #1ECC6A;
+	height: 12px;
+}
+.academia #folego #marcador .preenchimento {
+	background: #A5EBC3;
 }
 .academia .botao {
 	border: 1px solid #000;
@@ -119,7 +131,6 @@ body {
 }
 .academia #atividades .preenchimento {
 	background: #A5DFEB;
-	width: 70%;
 }
 .academia #atividades > div {
 	display: grid;
