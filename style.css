@@ -15,7 +15,10 @@ body {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	overflow: hidden scroll;
+	overflow: hidden auto;
+}
+.preenchimento {
+	transition: width 0.3s 0s ease-out;
 }
 #arena {
 	background-color: #ddd;
@@ -134,6 +137,7 @@ body {
 }
 .academia #atividades > div {
 	display: grid;
+	justify-content: space-between;
 }
 .academia #atividades .valores {
 	grid-column: 1 / 3;

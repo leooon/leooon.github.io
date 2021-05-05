@@ -63,8 +63,7 @@ let respeitoInimigo = 0;
 let timer;
 let log = [];
 
-let folego           = 0;
-let folegoCapacidade = 30;
+
 
 function escolheGolpes() {
 	let contagemAtual = contagem;
@@ -196,72 +195,63 @@ function montaCenaBatalha() {
 
 	if (!timer)	timer = setInterval(iniciarTurno, 1000);
 }
-function montaCenaAcademia() {
-	clearInterval(timer);
-	timer = null;
-
-	let cena = sel('#cena')[0];
-	cena.classList.remove(...cena.classList);
-	cena.classList.add('academia');
-
-	cena.innerHTML = `
-		<div id="folego">
-			<div id="indicador">
-				Folego: <span id="folegoInfo">${folego}</span><br><br>
-				<div id="marcador">
-					<div class="preenchimento"></div>
-				</div>
-			</div>
-			<div class="botao" id="botaoFolego">+1</div>
-		</div>
-		<div id="atividades">
-			<div>
-				<div class="valores">Força: <span id="forcaValores">1k (+10/s)</div>
-				<div class="capacidade">
-					<div class="preenchimento"></div>
-				</div>
-				<div class="botao">-</div>
-				<div class="botao">+</div>
-			</div>
-			<div>
-				<div class="valores">Destreza: <span id="forcaValores">1k (+10/s)</div>
-				<div class="capacidade">
-					<div class="preenchimento"></div>
-				</div>
-				<div class="botao">-</div>
-				<div class="botao">+</div>
-			</div>
-			<div>
-				<div class="valores">Equilíbrio: <span id="forcaValores">1k (+10/s)</div>
-				<div class="capacidade">
-					<div class="preenchimento"></div>
-				</div>
-				<div class="botao">-</div>
-				<div class="botao">+</div>
-			</div>
-			<div>
-				<div class="valores">Charme: <span id="forcaValores">1k (+10/s)</div>
-				<div class="capacidade">
-					<div class="preenchimento"></div>
-				</div>
-				<div class="botao">-</div>
-				<div class="botao">+</div>
-			</div>
-		</div>
-	`;
-
-	sel('#botaoFolego')[0].addEventListener('click', adicionarFolego);
-}
-
-function adicionarFolego() {
-	if (folego == folegoCapacidade) return false;
-
-	folego++;
-
-	sel('#folegoInfo')[0].innerHTML = folego;
-	sel('#folego .preenchimento')[0].style.width = retornarPorcentagem(folego, folegoCapacidade) + "%";
-}
 
 function retornarPorcentagem(atual, total) {
 	return Math.ceil((atual / total) * 100);
+}
+
+function gastaFolego(atividade) {
+	if (folego) {
+		if (atividade == 'forca') {
+			if (forca <= forcaTotal) {
+				forca += forcaIncremento;
+				updateForca();
+			} else {
+				return false;
+			}
+		}
+		if (atividade == 'destreza') {
+			if (destreza <= destrezaTotal) {
+				destreza += destrezaIncremento;
+				updateDestreza();
+			} else {
+				return false;
+			}
+		}
+		if (atividade == 'equilibrio') {
+			if (equilibrio <= equilibrioTotal) {
+				equilibrio += equilibrioIncremento;
+				updateEquilibrio();
+			} else {
+				return false;
+			}
+		}
+		if (atividade == 'charme') {
+			if (charme <= charmeTotal) {
+				charme += charmeIncremento;
+				updateCharme();
+			} else {
+				return false;
+			}
+		}
+		folego--;
+		atualizaFolego();
+	}
+}
+
+function updateForca() {
+	// infoForca = sel('#forcaValores')[0];
+	// infoForca.innerHTML = `${forca}/${forcaTotal} (+${forcaIncremento}/s)`;
+}
+function updateDestreza() {
+	// infoDestreza = sel('#destrezaValores')[0];
+	// infoDestreza.innerHTML = `${destreza}/${destrezaTotal} (+${destrezaIncremento}/s)`;
+}
+function updateEquilibrio() {
+	// infoEquilibrio = sel('#equilibrioValores')[0];
+	// infoEquilibrio.innerHTML = `${equilibrio}/${equilibrioTotal} (+${equilibrioIncremento}/s)`;
+}
+function updateCharme() {
+	// infoCharme = sel('#charmeValores')[0];
+	// infoCharme.innerHTML = `${charme}/${charmeTotal} (+${charmeIncremento}/s)`;
 }
