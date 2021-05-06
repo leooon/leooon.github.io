@@ -1,3 +1,5 @@
+
+/* Geral */
 body {
 	background-color: #000;
 	margin: 0;
@@ -17,9 +19,26 @@ body {
 	flex-grow: 1;
 	overflow: hidden auto;
 }
+#menu {
+	min-height: 50px;
+	display: flex;
+	border-top: 3px solid #000;
+}
+#menu div {
+	cursor: pointer;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#menu div.ativo {
+	text-decoration: underline solid #00DCFF 4px;
+}
 .preenchimento {
 	transition: width 0.3s 0s ease-out;
 }
+
+/* Batalha */
 #arena {
 	background-color: #ddd;
 	padding: 20px;
@@ -72,23 +91,8 @@ body {
 	padding: 10px 10px 5px;
 	text-align: center;
 }
-#menu {
-	height: 50px;
-	display: flex;
-	border-top: 3px solid #000;
-}
-#menu div {
-	cursor: pointer;
-	flex-grow: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-#menu div.ativo {
-	text-decoration: underline solid #00DCFF 4px;
-}
 
-/* ACADEMIA */
+/* Academia  */
 .academia #folego {
 	display: flex;
 	border-bottom: 1px solid #000;
@@ -123,7 +127,8 @@ body {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 40px 20px;
-	margin: 20px;
+	padding: 20px;
+	border-bottom: 1px solid #000;
 }
 .academia #atividades .capacidade {
 	display: flex;
@@ -137,11 +142,30 @@ body {
 }
 .academia #atividades > div {
 	display: grid;
-	justify-content: space-between;
+	grid-template-columns: 70px 1fr;
 }
 .academia #atividades .valores {
 	grid-column: 1 / 3;
 }
 .academia #atividades .capacidade {
 	grid-column: 1 / 3;
+}
+/* Academia - Escola */
+.academia #escola {
+	padding: 20px;
+	display: flex;
+	flex-flow: column;
+	gap: 20px;
+}
+.academia #escola > div {
+	display: flex;
+}
+.academia #escola .info {
+	flex-grow: 1;
+}
+.academia #escola .info span {
+	font-size: 16px;
+}
+.academia #escola .botao {
+	width: 40%;
 }

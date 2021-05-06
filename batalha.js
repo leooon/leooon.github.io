@@ -1,5 +1,3 @@
-let versao = 0.2;
-
 let golpes = [];
 
 class Golpe {
@@ -21,12 +19,6 @@ new Golpe('Baby Freeza', 110, 180);
 new Golpe('Hellicopter', 30, 80);
 new Golpe('The Frog', 140, 400);
 
-function sel(t) {
-	return document.querySelectorAll(t);
-}
-function rand(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function montarMenuGolpes() {
 	const menu = sel('#menuGolpes')[0];
@@ -44,16 +36,6 @@ function montarMenuGolpes() {
 	});
 }
 
-function corrigeAltura() {
-	sel('#container')[0].style.height = window.innerHeight +'px';
-}
-document.addEventListener('DOMContentLoaded', () => {
-	corrigeAltura();
-	ativaMenu();
-	montaCenaAcademia();
-});
-window.addEventListener('resize', corrigeAltura);
-
 let energiaTotal    = 200;
 let energia         = 200;
 let energiaGanho    = 100;
@@ -62,8 +44,8 @@ let respeitoVoce    = 0;
 let respeitoInimigo = 0;
 let timer;
 let log = [];
-
-
+let fase  = 0;
+let turno = 0;
 
 function escolheGolpes() {
 	let contagemAtual = contagem;
@@ -93,8 +75,6 @@ function escolheGolpes() {
 	}
 }
 
-let turno = 0;
-let fase  = 0;
 function iniciarTurno() {
 	if (turno >= 5) {
 		timer = null;
@@ -131,18 +111,22 @@ function resetBotoes() {
 		el.classList.remove('ativo', 'proibido');
 	});
 }
+
 function atualizaEnergia() {
 	porcentagem = energia / 2;
 	sel('#preenchimento')[0].style.width = porcentagem +'%';
 }
+
 function atualizaRespeito() {
 	sel('#voce-respeito')[0].innerHTML = respeitoVoce;
 }
+
 function criaLog(texto) {
 	log.push(texto);
 
 	exibeLog();
 }
+
 function exibeLog() {
 	let logArea = sel('#log')[0];
 	logArea.innerHTML = '';
@@ -150,22 +134,6 @@ function exibeLog() {
 	log.forEach(texto => {
 		logArea.insertAdjacentHTML('afterbegin', texto);
 	})
-}
-
-function ativaMenu() {
-	let botoesMenu = sel('#menu div');
-
-	botoesMenu.forEach(el => el.addEventListener('click', () => {
-		let ativo = sel('#menu div.ativo')[0];
-		ativo.classList.remove('ativo');
-		el.classList.add('ativo');
-
-		if (el.classList.contains('batalha')) {
-			montaCenaBatalha();
-		} else if (el.classList.contains('academia')) {
-			montaCenaAcademia();
-		}
-	}));
 }
 
 function montaCenaBatalha() {
@@ -194,10 +162,6 @@ function montaCenaBatalha() {
 	atualizaEnergia();
 
 	if (!timer)	timer = setInterval(iniciarTurno, 1000);
-}
-
-function retornarPorcentagem(atual, total) {
-	return Math.ceil((atual / total) * 100);
 }
 
 function gastaFolego(atividade) {
@@ -237,21 +201,4 @@ function gastaFolego(atividade) {
 		folego--;
 		atualizaFolego();
 	}
-}
-
-function updateForca() {
-	// infoForca = sel('#forcaValores')[0];
-	// infoForca.innerHTML = `${forca}/${forcaTotal} (+${forcaIncremento}/s)`;
-}
-function updateDestreza() {
-	// infoDestreza = sel('#destrezaValores')[0];
-	// infoDestreza.innerHTML = `${destreza}/${destrezaTotal} (+${destrezaIncremento}/s)`;
-}
-function updateEquilibrio() {
-	// infoEquilibrio = sel('#equilibrioValores')[0];
-	// infoEquilibrio.innerHTML = `${equilibrio}/${equilibrioTotal} (+${equilibrioIncremento}/s)`;
-}
-function updateCharme() {
-	// infoCharme = sel('#charmeValores')[0];
-	// infoCharme.innerHTML = `${charme}/${charmeTotal} (+${charmeIncremento}/s)`;
 }

@@ -87,6 +87,7 @@ function montaCenaAcademia() {
 	timer = null;
 
 	let cena = sel('#cena')[0];
+	cena.innerHTML = "";
 	cena.classList.remove(...cena.classList);
 	cena.classList.add('academia');
 
@@ -101,6 +102,7 @@ function montaCenaAcademia() {
 			<div class="botao" id="botaoFolego">+1</div>
 		</div>`;
 	cena.insertAdjacentHTML('beforeend', folegoHtml);
+	atualizarFolego();
 
 	let atividadesHtml = `<div id="atividades">`;
 	for (atividade in atividades) {
@@ -111,9 +113,55 @@ function montaCenaAcademia() {
 
 	for (atividade in atividades) {
 		atividades[atividade].criarClicks();
+		atividades[atividade].atualizarHtml();
 	};
 
 	sel('#botaoFolego')[0].addEventListener('click', adicionarFolego);
+
+	let escolaHtml = `
+		<div id="escola">
+			<div class="aprender_golpe">
+				<div class="info"><span>Air Flare</span><br>30f / 20r</div>
+				<div class="botao">2k F</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+			<div class="aprender_golpe">
+				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
+				<div class="botao">3k C + 750 D</div>
+			</div>
+		</div>`;
+	cena.insertAdjacentHTML('beforeend', escolaHtml);
 }
 
 function updateValores() {
