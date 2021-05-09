@@ -1,12 +1,13 @@
 let atividades = [];
 
 class Atividade {
-	constructor(alias, nome) {
+	constructor(alias, letra, nome) {
 		this.alias      = alias;
 		this.nome       = nome;
 		this.valor      = 0;
 		this.limite     = 10000;
 		this.incremento = 0;
+		this.letra      = letra;
 
 		atividades = {...atividades, ...{[alias]: this}};
 	}
@@ -77,10 +78,10 @@ class Atividade {
 		});
 	}
 }
-new Atividade('forca', 'Força');
-new Atividade('destreza', 'Destreza');
-new Atividade('equilibrio', 'Equilíbrio');
-new Atividade('charme', 'Charme');
+new Atividade('forca', 'f', 'Força');
+new Atividade('destreza', 'd', 'Destreza');
+new Atividade('equilibrio', 'e', 'Equilíbrio');
+new Atividade('charme', 'c', 'Charme');
 
 function montaCenaAcademia() {
 	clearInterval(timer);
@@ -118,56 +119,56 @@ function montaCenaAcademia() {
 
 	sel('#botaoFolego')[0].addEventListener('click', adicionarFolego);
 
-	let escolaHtml = `
-		<div id="escola">
-			<div class="aprender_golpe">
-				<div class="info"><span>Air Flare</span><br>30f / 20r</div>
-				<div class="botao">2k F</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-			<div class="aprender_golpe">
-				<div class="info"><span>Hellicopter</span><br>30f / 20r</div>
-				<div class="botao">3k C + 750 D</div>
-			</div>
-		</div>`;
+	let escolaHtml = `<div id="escola">`;
+	let custoHtml;
+	for ([key, golpe] of Object.entries(golpes)) {
+		custoHtml = [];
+		for ([key, value] of Object.entries(golpe.custo)) {
+			custoHtml.push(`${value}${atividades[key].letra}`);
+		};
+		custoHtml = custoHtml.join(' + ');
+
+		escolaHtml += `
+			<div class="aprender_golpe inativo" id="escola_${golpe.alias}">
+				<div class="info"><span>${golpe.nome}</span><br>${golpe.energia}e / ${golpe.respeito}r</div>
+				<div class="botao">${custoHtml}</div>
+			</div>`
+	};
+	escolaHtml += `</div>`
 	cena.insertAdjacentHTML('beforeend', escolaHtml);
+
+	for (golpe in golpes) {
+		golpes[golpe].criarClicks();
+	};
+
+
 }
 
 function updateValores() {
 	for (atividade in atividades) {
 		atividades[atividade].atualizarTotal();
 	};
+
+	atualizarEscola();
+}
+
+function atualizarEscola() {
+	for ([key, golpe] of Object.entries(golpes)) {
+		let disponivel = true;
+
+		for ([atividade, custo] of Object.entries(golpe.custo)) {
+			if (custo > atividades[atividade].valor) {
+				disponivel = false;
+			}
+		}
+		
+		let botao = sel(`#escola_${golpe.alias}`)[0];
+		if (disponivel && botao.classList.contains('inativo')) {
+			botao.classList.remove('inativo');
+		} else if (!disponivel && !botao.classList.contains('inativo')) {
+			botao.classList.add('inativo');
+		}
+	}
 }
 
 function adicionarFolego() {

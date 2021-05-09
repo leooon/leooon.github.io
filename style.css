@@ -169,3 +169,12 @@ body {
 .academia #escola .botao {
 	width: 40%;
 }
+.academia #escola .aprender_golpe.inativo .botao {
+	border-color: #ccc;
+	box-shadow: 5px 5px 0px 0px #ccc;
+	color: #ccc;
+}
+.academia #escola .aprender_golpe.aprendido .botao {
+	border: 1px solid #fff;
+	box-shadow: none;
+}

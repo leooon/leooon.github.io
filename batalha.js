@@ -1,24 +1,42 @@
 let golpes = [];
 
 class Golpe {
-	constructor(nome, energia, respeito) {
+	constructor(alias, nome, energia, respeito, custo) {
+		this.alias    = alias;
 		this.nome     = nome;
 		this.energia  = energia;
 		this.respeito = respeito;
+		this.custo    = custo;
 
-		golpes.push(this);
+		golpes = {...golpes, ...{[alias]: this}};
 	}
 
-	greet() {
-		return `${this.name} says hello.`;
+	criarClicks() {
+		let botao = sel(`#escola #escola_${this.alias}`)[0];
+		
+		botao.alias = this.alias;
+		botao.addEventListener('click', () => {
+			golpes[this.alias].aprender();
+		});
+	}
+
+	aprender() {
+		let info = sel(`#escola #escola_${this.alias}`)[0];
+
+		if (info.classList.contains('inativo')) {
+			return;
+		} else {
+			info.classList.add('aprendido');
+			let botao = sel(`#escola #escola_${this.alias} .botao`)[0];
+			botao.innerHTML = "Aprendido!";
+		}
 	}
 }
-new Golpe('Air Flare', 30, 45);
-new Golpe('Deadman', 75, 120);
-new Golpe('Baby Freeza', 110, 180);
-new Golpe('Hellicopter', 30, 80);
-new Golpe('The Frog', 140, 400);
-
+new Golpe('airflare', 'Air Flare', 30, 45, {forca: 600, destreza: 400});
+new Golpe('deadman', 'Deadman', 75, 120, {forca: 1200, charme: 300});
+new Golpe('babyfreeza', 'Baby Freeza', 110, 180, {destreza: 6000, equilibrio: 200});
+new Golpe('hellicopter', 'Hellicopter', 30, 80, {equilibrio: 200, charme: 6000});
+new Golpe('thefrog', 'The Frog', 140, 400, {forca: 180, equilibrio: 3600});
 
 function montarMenuGolpes() {
 	const menu = sel('#menuGolpes')[0];
