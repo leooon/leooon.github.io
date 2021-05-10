@@ -1,47 +1,9 @@
-let golpes = [];
-
-class Golpe {
-	constructor(alias, nome, energia, respeito, custo) {
-		this.alias    = alias;
-		this.nome     = nome;
-		this.energia  = energia;
-		this.respeito = respeito;
-		this.custo    = custo;
-
-		golpes = {...golpes, ...{[alias]: this}};
-	}
-
-	criarClicks() {
-		let botao = sel(`#escola #escola_${this.alias}`)[0];
-		
-		botao.alias = this.alias;
-		botao.addEventListener('click', () => {
-			golpes[this.alias].aprender();
-		});
-	}
-
-	aprender() {
-		let info = sel(`#escola #escola_${this.alias}`)[0];
-
-		if (info.classList.contains('inativo')) {
-			return;
-		} else {
-			info.classList.add('aprendido');
-			let botao = sel(`#escola #escola_${this.alias} .botao`)[0];
-			botao.innerHTML = "Aprendido!";
-		}
-	}
-}
-new Golpe('airflare', 'Air Flare', 30, 45, {forca: 600, destreza: 400});
-new Golpe('deadman', 'Deadman', 75, 120, {forca: 1200, charme: 300});
-new Golpe('babyfreeza', 'Baby Freeza', 110, 180, {destreza: 6000, equilibrio: 200});
-new Golpe('hellicopter', 'Hellicopter', 30, 80, {equilibrio: 200, charme: 6000});
-new Golpe('thefrog', 'The Frog', 140, 400, {forca: 180, equilibrio: 3600});
-
 function montarMenuGolpes() {
 	const menu = sel('#menuGolpes')[0];
 
-	golpes.forEach((golpe) => {
+	for ([alias, level] of jogador.golpes) {
+		golpe = golpes[alias];
+
 		let botao = `
 		<div class="botao" data-energia="${golpe.energia}" data-respeito="${golpe.respeito}" data-nome="${golpe.nome}">
 			<div class="nome">${golpe.nome}</div>
@@ -51,7 +13,7 @@ function montarMenuGolpes() {
 		`;
 		
 		menu.insertAdjacentHTML('afterbegin', botao);
-	});
+	};
 }
 
 let energiaTotal    = 200;

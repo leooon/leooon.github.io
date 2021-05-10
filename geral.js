@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	corrigeAltura();
 	ativaMenu();
 
-	montaCenaAcademia();
-	sel('#menu .academia')[0].click();
+	// montaCenaAcademia();
+	debug();
 });
 window.addEventListener('resize', corrigeAltura);
 

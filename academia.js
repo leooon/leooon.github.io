@@ -120,28 +120,15 @@ function montaCenaAcademia() {
 	sel('#botaoFolego')[0].addEventListener('click', adicionarFolego);
 
 	let escolaHtml = `<div id="escola">`;
-	let custoHtml;
-	for ([key, golpe] of Object.entries(golpes)) {
-		custoHtml = [];
-		for ([key, value] of Object.entries(golpe.custo)) {
-			custoHtml.push(`${value}${atividades[key].letra}`);
-		};
-		custoHtml = custoHtml.join(' + ');
-
-		escolaHtml += `
-			<div class="aprender_golpe inativo" id="escola_${golpe.alias}">
-				<div class="info"><span>${golpe.nome}</span><br>${golpe.energia}e / ${golpe.respeito}r</div>
-				<div class="botao">${custoHtml}</div>
-			</div>`
+	for ([key, golpe] of golpes) {
+		escolaHtml += golpe.aprenderTemplate();
 	};
 	escolaHtml += `</div>`
 	cena.insertAdjacentHTML('beforeend', escolaHtml);
 
-	for (golpe in golpes) {
-		golpes[golpe].criarClicks();
+	for ([key, golpe] of golpes) {
+		golpe.criarClicks();
 	};
-
-
 }
 
 function updateValores() {
@@ -153,10 +140,10 @@ function updateValores() {
 }
 
 function atualizarEscola() {
-	for ([key, golpe] of Object.entries(golpes)) {
+	for ([key, golpe] of golpes) {
 		let disponivel = true;
 
-		for ([atividade, custo] of Object.entries(golpe.custo)) {
+		for ([atividade, custo] of golpe.custo) {
 			if (custo > atividades[atividade].valor) {
 				disponivel = false;
 			}
