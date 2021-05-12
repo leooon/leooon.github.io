@@ -12,31 +12,21 @@ class Golpe {
 	}
 
 	criarClicks() {
-		let botao = sel(`#escola #escola_${this.alias}`)[0];
+		let botao = sel(`#escola #escola_${this.alias} .botao`)[0];
 		
 		botao.alias = this.alias;
-		botao.addEventListener('click', () => {
-			golpes.get(this.alias).aprender();
-		});
+		botao.addEventListener('click', golpes.get(this.alias).aprender);
 	}
 
 	aprender() {
-		let info = sel(`#escola #escola_${this.alias}`)[0];
+		jogador.get('golpes').set(this.alias, 1);
 
-		if (info.classList.contains('inativo')) {
-			return;
-		} else {
-			info.classList.add('aprendido');
-			let botao = sel(`#escola #escola_${this.alias} .botao`)[0];
-			botao.innerHTML = "Aprendido!";
-
-			jogador.golpes.set(this.alias, 1);
-
-			for (let [atividade, custo] of golpes.get(this.alias).custo) {
-				atividades[atividade].valor -= custo;
-				atividades[atividade].atualizarTotal();
-			}
+		for (let [atividade, custo] of golpes.get(this.alias).custo) {
+			atividades[atividade].valor -= custo;
+			atividades[atividade].atualizarTotal();
 		}
+		
+		golpes.get(this.alias).atualizarEscola();
 	}
 
 	aprenderTemplate() {
@@ -47,12 +37,49 @@ class Golpe {
 		custoHtml = custoHtml.join(' + ');
 
 		let html = `
-			<div class="aprender_golpe inativo" id="escola_${this.alias}">
+			<div class="aprender_golpe" id="escola_${this.alias}">
 				<div class="info"><span>${this.nome}</span><br>${this.energia}e / ${this.respeito}r</div>
 				<div class="botao">${custoHtml}</div>
 			</div>`
 
 		return html;
+	}
+
+	atualizarEscola() {
+		let info  = sel(`#escola_${this.alias}`)[0];
+		let botao = sel(`#escola #escola_${this.alias} .botao`)[0];
+		
+		if (jogador.get('golpes').has(this.alias)) {
+			if (!info.classList.contains('aprendido')) {
+				info.classList.add('aprendido');
+				botao.innerHTML = "Aprendido!";
+				botao.removeEventListener('click', golpes.get(this.alias).aprender);
+			}
+			
+			return;
+		}
+	
+		let disponivel = this.checarDisponibilidade();
+
+		if (disponivel && info.classList.contains('inativo')) {
+			info.classList.remove('inativo');
+			botao.addEventListener('click', golpes.get(this.alias).aprender);
+		} else if (!disponivel && !info.classList.contains('inativo')) {
+			info.classList.add('inativo');
+			botao.removeEventListener('click', golpes.get(this.alias).aprender);
+		}
+	}
+
+	checarDisponibilidade() {
+		let disponivel = true;
+
+		for (let [atividade, custo] of this.custo) {
+			if (custo > atividades[atividade].valor) {
+				disponivel = false;
+			}
+		}
+
+		return disponivel;
 	}
 }
 

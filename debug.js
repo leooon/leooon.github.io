@@ -9,8 +9,8 @@ function debug () {
 	// atividades.equilibrio.valor = 5000;
 	// atividades.charme.valor = 5000;
 
-	// atividades.forca.incremento = 500;
-	// atividades.destreza.incremento = 500;
-	// atividades.equilibrio.incremento = 500;
-	// atividades.charme.incremento = 500;
+	// atividades.forca.incremento = 100;
+	// atividades.destreza.incremento = 100;
+	// atividades.equilibrio.incremento = 100;
+	// atividades.charme.incremento = 100;
 }

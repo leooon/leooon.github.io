@@ -1,3 +1,2 @@
-const jogador = {
-	golpes: new Map(),
-}
+const jogador = new Map();
+jogador.set('golpes', new Map());
