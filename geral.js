@@ -17,25 +17,11 @@ function corrigeAltura() {
 
 document.addEventListener('DOMContentLoaded', () => {
 	corrigeAltura();
-	ativaMenu();
 
-	// montaCenaAcademia();
+	// montaMenu();
+	// ativaMenu();
+
+	montaCenaStart();
 	debug();
 });
 window.addEventListener('resize', corrigeAltura);
-
-function ativaMenu() {
-	let botoesMenu = sel('#menu div');
-
-	botoesMenu.forEach(el => el.addEventListener('click', () => {
-		let ativo = sel('#menu div.ativo')[0];
-		ativo.classList.remove('ativo');
-		el.classList.add('ativo');
-
-		if (el.classList.contains('batalha')) {
-			montaCenaBatalha();
-		} else if (el.classList.contains('academia')) {
-			montaCenaAcademia();
-		}
-	}));
-}

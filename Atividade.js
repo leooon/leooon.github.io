@@ -83,3 +83,11 @@ new Atividade('forca', 'f', 'Força');
 new Atividade('destreza', 'd', 'Destreza');
 new Atividade('equilibrio', 'e', 'Equilíbrio');
 new Atividade('charme', 'c', 'Charme');
+
+for (atividade in atividades) {
+	
+}
+
+for ([teste, teste2] of jogador.get('atividades')) {
+	console.log('oi');
+}

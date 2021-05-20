@@ -55,6 +55,8 @@ function updateValores() {
 	for ([alias, golpe] of golpes) {
 		golpe.atualizarEscola();
 	}
+
+	save();
 }
 
 function adicionarFolego() {
@@ -83,4 +85,4 @@ function atualizarFolego() {
 let folego           = 0;
 let folegoCapacidade = 30;
 
-let frame = setInterval(updateValores, 1000);
+// let frame = setInterval(updateValores, 1000);

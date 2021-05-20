@@ -5,6 +5,7 @@ body {
 	margin: 0;
 	font: 14px Georgia;
 	box-sizing: border-box;
+	user-select: none;
 }
 #container {
 	background-color: #fff;
@@ -34,8 +35,64 @@ body {
 #menu div.ativo {
 	text-decoration: underline solid #00DCFF 4px;
 }
+.botao {
+	border: 1px solid #000;
+	box-shadow: 5px 5px 0px 0px #000000;
+	text-align: center;
+	padding: 8px 0px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
+	cursor: pointer;
+}
 .preenchimento {
 	transition: width 0.3s 0s ease-out;
+}
+
+/* Start */
+#cena.start .titulo {
+	flex-grow: 1;
+}
+#cena.start .titulo div {
+	font-size: 40px;
+	width: 300px;
+	padding: 10px;
+	background-color: #000;
+	color: #fff;
+	margin-top: 30%;
+}
+#cena.start #start-menu {
+	font-size: 16px;
+}
+
+/* Historia */
+#cena.historia #page {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+}
+#cena.historia .titulo {
+	font-size: 40px;
+	max-width: 300px;
+	padding: 10px;
+	background-color: #000;
+	color: #fff;
+}
+#cena.historia .titulo_interno {
+	font-size: 28px;
+	padding: 10px;
+	background-color: #000;
+	color: #fff;
+}
+#cena.historia .texto {
+	font-size: 18px;
+	padding: 40px;
+}
+
+#cena.historia .texto span {
+	opacity: 0;
 }
 
 /* Batalha */
