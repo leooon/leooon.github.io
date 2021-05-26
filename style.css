@@ -93,6 +93,14 @@ body {
 #cena.historia .texto span {
 	opacity: 0;
 }
+#cena.historia #terminarSorvete {
+	opacity: 0;
+	cursor: default;
+}
+#cena.historia #terminarSorvete.ativo {
+	opacity: 1;
+	cursor: pointer;
+}
 
 
 /* Batalha */
