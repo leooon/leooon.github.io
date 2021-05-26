@@ -90,10 +90,10 @@ body {
 	font-size: 18px;
 	padding: 40px;
 }
-
 #cena.historia .texto span {
 	opacity: 0;
 }
+
 
 /* Batalha */
 #arena {

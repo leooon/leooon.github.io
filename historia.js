@@ -30,7 +30,7 @@ function entrarCapitulo() {
 	let page = sel('#cena.historia #page')[0]
 
 	page.removeEventListener('click', entrarCapitulo)
-	page.addEventListener('click', proximaPagina)
+	// page.addEventListener('click', proximaPagina)
 
 	let cena = sel('#cena')[0];
 	
@@ -55,10 +55,10 @@ function proximaPagina() {
 
 function animar() {
 	let texto = sel('#cena.historia .texto')[0]
-	let base = texto.innerHTML.trim();
+	let base = texto.innerHTML.trim()
 
-	let limite = 1;
-	function teste() {
+	let limite = 1
+	function avancarTexto() {
 		texto.innerHTML = base.substring(0, limite) + `<span>${base.substring(limite)}</span>`
 		
 		if (limite == base.length) clearInterval(animacao)
@@ -70,5 +70,13 @@ function animar() {
 		}
 	}
 
-	let animacao = setInterval(teste, 25)
+	function avancarTudo() {
+		limite = base.length
+		avancarTexto()
+	}
+
+	let page = sel('#cena.historia #page')[0]
+	page.addEventListener('click', avancarTudo)
+
+	let animacao = setInterval(avancarTexto, 25)
 }
