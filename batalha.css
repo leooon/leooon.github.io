@@ -1,0 +1,107 @@
+/* Batalha */
+#arena2 {
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#arena2 #ringue {
+	background: #000;
+	width: 160px;
+	height: 160px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#arena2 .avatar {
+	animation: flip 3s ease-out infinite;
+}
+#arena2 .avatar div {
+	background: #FB3AA7;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-size: 22px;
+
+	animation: jump 3s ease-in infinite;
+}
+@keyframes jump {
+	0% {
+		transform: rotateZ(-0deg);
+	}
+	10% {
+		transform: rotateZ(-45deg);
+	}
+	100% {
+		transform: rotateZ(-45deg);
+	}
+}
+@keyframes flip {
+	0% {
+		transform: translateX(0px) rotateY(0deg);
+	}
+	10% {
+		transform: translateX(20px) rotateY(-30deg);
+	}
+	100% {
+		transform: translateX(20px) rotateY(-1800deg);
+	}
+}
+
+#arena {
+	background-color: #ddd;
+	padding: 20px;
+	display: none;
+}
+#arena #log {
+	height: 200px;
+	overflow: scroll;
+	background-color: azure;
+}
+#energia {
+	padding: 20px 20px 0;
+	display: none;
+}
+#energia #marcador {
+	display: flex;
+	border: 1px solid #1ECC6A;
+	box-shadow: 5px 5px 0px 0px #1ECC6A;
+	height: 12px;
+}
+#energia #marcador #preenchimento {
+	background: #A5EBC3;
+	width: 100%;
+}
+#menuGolpes {	
+	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 18px;
+}
+#menuGolpes .botao {
+	border: 1px solid #000;
+	box-shadow: 5px 5px 0px 0px #000000;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-template-columns: repeat(2, 1fr);
+	text-align: center;
+}
+#menuGolpes .botao.ativo {
+	background-color: #F8E2FF;
+}
+#menuGolpes .botao.proibido {
+	background-color: #ff9e9e;
+}
+#menuGolpes .botao div {
+	padding: 0 10px 10px;
+}
+#menuGolpes .botao .nome {
+	grid-column: 1 / 3;
+	grid-row: 1;
+	padding: 10px 10px 5px;
+	text-align: center;
+}

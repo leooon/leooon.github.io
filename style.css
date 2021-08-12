@@ -102,61 +102,6 @@ body {
 	cursor: pointer;
 }
 
-
-/* Batalha */
-#arena {
-	background-color: #ddd;
-	padding: 20px;
-}
-#arena #log {
-	height: 200px;
-	overflow: scroll;
-	background-color: azure;
-}
-#energia {
-	padding: 20px 20px 0;
-}
-#energia #marcador {
-	display: flex;
-	border: 1px solid #1ECC6A;
-	box-shadow: 5px 5px 0px 0px #1ECC6A;
-	height: 12px;
-}
-#energia #marcador #preenchimento {
-	background: #A5EBC3;
-	width: 100%;
-}
-#menuGolpes {	
-	padding: 20px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 18px;
-}
-#menuGolpes .botao {
-	border: 1px solid #000;
-	box-shadow: 5px 5px 0px 0px #000000;
-	display: grid;
-	justify-content: center;
-	align-items: center;
-	grid-template-columns: repeat(2, 1fr);
-	text-align: center;
-}
-#menuGolpes .botao.ativo {
-	background-color: #F8E2FF;
-}
-#menuGolpes .botao.proibido {
-	background-color: #ff9e9e;
-}
-#menuGolpes .botao div {
-	padding: 0 10px 10px;
-}
-#menuGolpes .botao .nome {
-	grid-column: 1 / 3;
-	grid-row: 1;
-	padding: 10px 10px 5px;
-	text-align: center;
-}
-
 /* Academia  */
 .academia #folego {
 	display: flex;

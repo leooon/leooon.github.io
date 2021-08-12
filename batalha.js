@@ -122,6 +122,11 @@ function montaCenaBatalha() {
 	cena.classList.add('batalha');
 
 	cena.innerHTML = `
+		<div id="arena2">
+			<div id="ringue">
+				<div class="avatar"><div>J</div></div>
+			</div>
+		</div>
 		<div id="arena">
 			Versão: ${versao}<br>
 			Turno: <span id="turno">${turno}</span><br>

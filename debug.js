@@ -2,6 +2,11 @@ function debug () {
 	// sel('#menu .academia')[0].click();
 	sel('#entrar')[0].click();
 	sel('#cena #page')[0].click();
+	sel('#cena #page')[0].click();
+	sel('#cena #page')[0].click();
+	sel('#cena #page')[0].click();
+	sel('#cena #page')[0].click();
+	sel('#terminarSorvete')[0].click();
 
 	// folego = 30;
 	// atualizarFolego();
